@@ -45,15 +45,9 @@ print("Basic Algorithmic Scripting");
 	Your result must be a string.
 */
 function reverseStringV1(str) {
-	arr=[];
-	res="";
-	for(var i=0; i<str.length;i++){
-		arr.push(str[i]);
-	}
-	arr.reverse()
-	for (var i = 0; i < arr.length; i++) {
-		res+=arr[i];
-		
+		let res="";
+	for(let i = str.length-1; i>=0; i--){
+		res+=str[i];
 	}
   return res;
 }
@@ -62,15 +56,11 @@ function reverseStringV1(str) {
 // such as split/reverse/join
 
 function reverseStringV2(str) {
-	arr=[];
-	res="";
-	for(var i=0; i<str.length;i++){
-		arr.push(str[i]);
-	}
-	while(i--){
-		res+=arr[i];
-	}
-  return res;
+
+ return str
+ 	.split('')
+ 	.reverse()
+ 	.join('');
 }
 
 print("reverseStringV1");
@@ -124,19 +114,40 @@ print(separator);
 	We'll pass strings with varying formats, such as "racecar", "RaceCar", and "race CAR" 
 	among others.
 	We'll also pass strings with special symbols, such as "2A3*3a2", "2A3  3a2", and "2_A3*3#A2".
+
 */
-function palindrome(str) {
-	res="";
-	for(var i=0;i<str.length;i++){
-		if(str[i]>"a" && str[i]<"z"){
-			res+=str[i];
-			}
-}
-	var ch=reverseStringV1(res);
-	return res===ch
+function isAlphaNum(c) {
+  return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
 }
 
-print("palindrome");
+function cleanStr(str) {
+  let result = "";
+  
+  for(let i = 0; i < str.length; i++) {
+    let currentChar = str[i];
+
+    if(isAlphaNum(currentChar)) {
+      result += currentChar;
+    }
+  }
+  
+  return result;
+}
+
+function palindrome(str) {
+
+		str = str.toLowerCase();
+		
+    str = cleanStr(str);
+  
+		let backward = str
+      .split('')
+      .reverse()
+      .join('');
+		
+		return backward === str
+	}
+	print("palindrome");
 test(palindrome('ab ba'), true);
 test(palindrome('ab_ba'), true);
 test(palindrome('7ab@ba7'), true);
@@ -147,6 +158,9 @@ test(palindrome('nope'), false);
 test(palindrome('My age is 0, 0 si ega ym.'), true);
 test(palindrome('1 eye for of 1 eye.'), false);
 print(separator);
+
+
+
 
 // Ex 3
 
@@ -231,7 +245,7 @@ function largestOfFour() {
 		[10, -200, 3, -400], [100, -2000, 330, -400]), [3, 30, 10, 330]);
 
 
-
+print(separator);
 
 
 // Ex 6
@@ -399,16 +413,37 @@ print(separator);
 	Lastly, ["Alien", "line"], should return true because all of the letters in "line" 
 	are present in "Alien".
 */
+function includs(str,c){
+	return str.indexOf(c) >= 0;
+}
+
+// function mutation(arr) {
+// 	let ch1=arr[0].toLowerCase();
+// 	let ch2=arr[1].toLowerCase();
+// 	for(let i = 0;i< ch2.length; i++) {
+// 		if(!includs(ch1,ch2[i])){
+// 			return false
+// 		}
+// 	} 
+// 	return true
+// }
+	// for(var i = 0; i < arr[1].length; i++) {
+	// 		if (arr[0].toLowerCase().indexOf(arr[1][i].toLowerCase()) === -1) {
+	// 			return false;
+	// 		}
+	// 	}
+	// 	return true;}
+
 function mutation(arr) {
-	let ch1=arr[0];
-	let ch2=arr[1];
-	for(let i = 0;i< ch1.length; i++) {
-		if(ch2.indexOf(ch1[i]) == -1)
-			return false
-	} 
+	let ch1=arr[0].toLowerCase();
+	let ch2=arr[1].toLowerCase();
+
+	ch2.split('').every(Function includs(), arr{
+		
+	}
 	return true
 }
-print("slasher");
+print("mutation");
 test(mutation(["hello", "hey"]), false);
 test(mutation(["hello", "Hello"]), true);
 test(mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"]), true);
